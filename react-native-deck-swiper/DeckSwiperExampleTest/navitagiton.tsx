@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {PALETTE} from './palette';
 
 const NavigationContext = React.createContext<
   | {
@@ -47,7 +46,7 @@ export function NavigationContainer({
         },
         registeredPageNames,
       }}>
-      <View style={{width: '100%', height: '100%', flexDirection: 'column',marginTop:20}}>
+      <View style={{width: '100%', height: '100%', flexDirection: 'column'}}>
         <Page name="INDEX">
           <IndexPage />
         </Page>
@@ -73,13 +72,13 @@ export function Page({name, children}: {name: string; children: any}) {
   return name === currentPageName ? (
     <View style={{width: '100%', height: '100%'}}>
       {name !== 'INDEX' && (
-        <View style={{backgroundColor: PALETTE.REACT_CYAN_DARK}}>
+        <View >
           <TouchableOpacity
             onPress={() => {
               navigateTo('INDEX');
             }}>
             <Text
-              style={[styles.buttonText, {color: PALETTE.REACT_CYAN_LIGHT}]}>
+              style={[styles.buttonText]}>
               {'‹ 返回列表'}
             </Text>
           </TouchableOpacity>
@@ -95,10 +94,11 @@ export function IndexPage() {
 
   return (
     <FlatList
+    style={{marginBottom:50}}
       data={registeredPageNames}
       renderItem={({item}) => {
         return (
-          <View style={{backgroundColor: PALETTE.REACT_CYAN_DARK}}>
+          <View>
             <TouchableOpacity
               onPress={() => {
                 navigateTo(item);
